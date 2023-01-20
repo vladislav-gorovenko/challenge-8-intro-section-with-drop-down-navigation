@@ -211,6 +211,9 @@ header {
   gap: 1.5rem;
   color: hsl(0deg, 0%, 41%);
 }
+.hidden-menu .menu-nav__item {
+  font-size: 1.4rem;
+}
 .hidden-menu .menu-nav__item i {
   margin-left: 3px;
 }
@@ -363,7 +366,7 @@ header {
   padding: 3rem 3rem;
 }
 .main__title {
-  font-size: 4.2rem;
+  font-size: 3rem;
   line-height: 1;
 }
 .main__description {
@@ -406,7 +409,7 @@ header {
   .main {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    height: 70vh;
+    height: 600px;
     width: 80vw;
     align-items: flex-end;
     margin: 0;
@@ -426,6 +429,8 @@ header {
     grid-row: 1/4;
     align-self: flex-end;
     text-align: left;
+    padding: 0 2rem;
+    gap: 5rem;
   }
   .main__section > .main__title {
     display: none;
@@ -434,14 +439,13 @@ header {
     grid-row: 4/5;
   }
   .main__title {
-    font-size: 8rem;
+    font-size: 6rem;
     padding-right: 2rem;
-    word-break: keep-all;
-    text-justify: distribute;
   }
   .main__btn {
     height: auto;
     align-self: start;
+    justify-self: start;
     padding: 2rem 3rem;
   }
   .main__description {
@@ -450,7 +454,7 @@ header {
   }
 }
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

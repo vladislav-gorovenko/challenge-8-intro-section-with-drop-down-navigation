@@ -1,0 +1,130 @@
+.main {
+  padding-top: 7vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  text-align: center;
+  justify-items: center;
+
+  &__title--desktop {
+    display: none;
+  }
+
+  &__img {
+    width: 100%;
+    content: url("../img/image-hero-mobile.png");
+  }
+
+  &__section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    @include mobile-padding;
+  }
+
+  &__title {
+    font-size: 4.2rem;
+    line-height: 1;
+  }
+
+  &__description {
+    color: $medium-gray;
+    font-size: 1.6rem;
+  }
+
+  &__btn {
+    padding: 1.5rem 3rem;
+    background: $almost-black;
+    color: $almost-white;
+    justify-self: center;
+
+    font-weight: return-font-weight("bold");
+    font-size: 1.7rem;
+
+    transition: background 0.3s ease-in-out;
+
+    border-radius: 1rem;
+
+    &:hover {
+      background: $almost-white;
+      color: $almost-black;
+      box-shadow: inset 0px 0px 0px 1px black;
+    }
+  }
+
+  &__companies {
+    @include mobile-padding;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    img {
+      margin: auto;
+    }
+  }
+}
+
+@include medium-screen {
+  .main {
+    margin: 0 auto;
+    width: 650px;
+  }
+}
+
+@include desktop-screen {
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    height: 70vh;
+    width: 80vw;
+    align-items: flex-end;
+
+    margin: 0;
+    padding: 0;
+
+    &__title--desktop {
+      display: block;
+    }
+
+    &__img {
+      height: inherit;
+      width: auto;
+      content: url("../img/image-hero-desktop.png");
+      grid-row: 1/5;
+      grid-column: 2/3;
+    }
+
+    &__section {
+      grid-row: 1/4;
+      align-self: flex-end;
+      text-align: left;
+
+      > .main__title {
+        display: none;
+      }
+    }
+
+    &__companies {
+      grid-row: 4/5;
+    }
+
+    &__title {
+      font-size: 8rem;
+      padding-right: 2rem;
+      word-break: keep-all;
+      text-justify: distribute;
+    }
+
+    &__btn {
+      height: auto;
+      align-self: start;
+      padding: 2rem 3rem;
+    }
+
+    &__description {
+      font-size: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}

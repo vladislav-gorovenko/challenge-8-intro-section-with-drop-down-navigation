@@ -1,0 +1,457 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.8rem;
+  font-family: "Epilogue", sans-serif;
+  font-weight: 500;
+  color: hsl(0deg, 0%, 8%);
+  line-height: 1.5;
+  background: hsl(0deg, 0%, 98%);
+}
+body.visible::after {
+  visibility: visible;
+  background: rgba(20, 20, 20, 0.4);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 0.3s ease-in-out;
+  background: rgba(20, 20, 20, 0);
+  visibility: hidden;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+@-webkit-keyframes scale-in-animation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-in-animation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes scale-out-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(0);
+    visibility: hidden;
+    position: absolute;
+  }
+}
+@keyframes scale-out-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(0);
+    visibility: hidden;
+    position: absolute;
+  }
+}
+header {
+  padding: 3rem 3rem;
+  height: 7vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.logo {
+  height: 24px;
+  z-index: 2;
+}
+
+.nav {
+  display: none;
+  justify-self: flex-start;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.account-btns {
+  display: none;
+  color: hsl(0deg, 0%, 41%);
+}
+.account-btns__btn {
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+}
+.account-btns__btn:nth-of-type(2) {
+  border-radius: 1rem;
+  border: 1px solid black;
+}
+.account-btns__btn:hover {
+  color: hsl(0deg, 0%, 8%);
+}
+
+.menu-btn {
+  height: 20px;
+  width: 32px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s transform ease-in-out;
+  cursor: pointer;
+}
+.menu-btn__burger {
+  width: 100%;
+  height: 2px;
+  background: hsl(0deg, 0%, 8%);
+  border-radius: 1px;
+  position: relative;
+  transition: 0.2s transform ease-in-out;
+}
+.menu-btn__burger::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: hsl(0deg, 0%, 8%);
+  transition: 0.2s transform ease-in-out;
+  transform: translateY(-7px);
+}
+.menu-btn__burger::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: hsl(0deg, 0%, 8%);
+  transition: 0.2s transform ease-in-out;
+  transform: translateY(7px);
+}
+.menu-btn.active {
+  transform: rotateZ(180deg);
+}
+.menu-btn.active .menu-btn__burger::before {
+  transform: rotateZ(45deg);
+}
+.menu-btn.active .menu-btn__burger {
+  background: transparent;
+}
+.menu-btn.active .menu-btn__burger::after {
+  transform: rotateZ(-45deg);
+}
+
+.hidden-menu {
+  padding: 7rem 5rem;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 70%;
+  background: hsl(0deg, 0%, 98%);
+  transform: translateX(100%);
+  transition: transform 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  visibility: hidden;
+}
+.hidden-menu.visible {
+  transform: translateX(0);
+  visibility: visible;
+}
+.hidden-menu .nav {
+  display: block;
+}
+.hidden-menu .menu-nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: flex-start;
+  gap: 1.5rem;
+  color: hsl(0deg, 0%, 41%);
+}
+.hidden-menu .menu-nav__item i {
+  margin-left: 3px;
+}
+.hidden-menu .menu-nav__item.active .menu-nav__sub-items {
+  visibility: visible;
+  position: initial;
+  -webkit-animation: scale-in-animation 0.2s ease-out;
+          animation: scale-in-animation 0.2s ease-out;
+}
+.hidden-menu .menu-nav__description {
+  cursor: pointer;
+}
+.hidden-menu .menu-nav__description:hover {
+  color: hsl(0deg, 0%, 8%);
+}
+.hidden-menu .menu-nav__description img.down {
+  content: url("../img/icon-arrow-down.svg");
+}
+.hidden-menu .menu-nav__description img {
+  content: url("../img/icon-arrow-up.svg");
+}
+.hidden-menu .menu-nav__sub-items {
+  transform-origin: top right;
+  -webkit-animation: scale-out-animation 0.4s ease-out alternate forwards;
+          animation: scale-out-animation 0.4s ease-out alternate forwards;
+  padding-left: 2rem;
+}
+.hidden-menu .menu-nav__sub-items i {
+  margin-right: 1rem;
+}
+.hidden-menu .menu-nav__sub-item {
+  margin-top: 1rem;
+  cursor: pointer;
+}
+.hidden-menu .menu-nav__sub-item:hover {
+  color: hsl(0deg, 0%, 8%);
+}
+.hidden-menu .account-btns {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hidden-menu .account-btns__btn {
+  margin: 0.5rem 0;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: hsl(0deg, 0%, 41%);
+  font-size: 1.5rem;
+}
+.hidden-menu .account-btns__btn--register {
+  border: 1.5px solid hsl(0deg, 0%, 41%);
+}
+.hidden-menu .account-btns__btn--register:hover {
+  border: 1.5px solid hsl(0deg, 0%, 8%);
+}
+.hidden-menu .account-btns__btn:hover {
+  color: hsl(0deg, 0%, 8%);
+}
+
+@media screen and (min-width: 760px) {
+  body::after {
+    display: none;
+  }
+  .menu-btn {
+    display: none;
+  }
+  .account-btns {
+    display: flex;
+  }
+  .nav {
+    display: block;
+  }
+  .hidden-menu {
+    padding: 0;
+    position: initial;
+    height: auto;
+    width: 100%;
+    translate: -100%;
+    visibility: visible;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    transition: none;
+    background: transparent;
+  }
+  .hidden-menu .menu-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+  .hidden-menu .menu-nav__item {
+    margin-left: 1rem;
+  }
+  .hidden-menu .menu-nav__item.active .menu-nav__sub-items {
+    position: absolute;
+    top: 100%;
+  }
+  .hidden-menu .menu-nav__sub-items {
+    position: absolute;
+    top: 100%;
+    translate: -10%;
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 30px 0 rgba(0, 0, 0, 0.1);
+  }
+  .hidden-menu .menu-nav__sub-item:nth-of-type(1) {
+    margin-top: 0;
+  }
+  .hidden-menu .menu-nav__sub-item {
+    font-size: 1.3rem;
+  }
+  .hidden-menu .account-btns {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+  .hidden-menu .account-btns__btn {
+    margin-left: 2rem;
+  }
+}
+.main {
+  padding-top: 7vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  text-align: center;
+  justify-items: center;
+}
+.main__title--desktop {
+  display: none;
+}
+.main__img {
+  width: 100%;
+  content: url("../img/image-hero-mobile.png");
+}
+.main__section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 3rem 3rem;
+}
+.main__title {
+  font-size: 4.2rem;
+  line-height: 1;
+}
+.main__description {
+  color: hsl(0deg, 0%, 41%);
+  font-size: 1.6rem;
+}
+.main__btn {
+  padding: 1.5rem 3rem;
+  background: hsl(0deg, 0%, 8%);
+  color: hsl(0deg, 0%, 98%);
+  justify-self: center;
+  font-weight: 700;
+  font-size: 1.7rem;
+  transition: background 0.3s ease-in-out;
+  border-radius: 1rem;
+}
+.main__btn:hover {
+  background: hsl(0deg, 0%, 98%);
+  color: hsl(0deg, 0%, 8%);
+  box-shadow: inset 0px 0px 0px 1px black;
+}
+.main__companies {
+  padding: 3rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.main__companies img {
+  margin: auto;
+}
+
+@media screen and (min-width: 760px) {
+  .main {
+    margin: 0 auto;
+    width: 650px;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    height: 70vh;
+    width: 80vw;
+    align-items: flex-end;
+    margin: 0;
+    padding: 0;
+  }
+  .main__title--desktop {
+    display: block;
+  }
+  .main__img {
+    height: inherit;
+    width: auto;
+    content: url("../img/image-hero-desktop.png");
+    grid-row: 1/5;
+    grid-column: 2/3;
+  }
+  .main__section {
+    grid-row: 1/4;
+    align-self: flex-end;
+    text-align: left;
+  }
+  .main__section > .main__title {
+    display: none;
+  }
+  .main__companies {
+    grid-row: 4/5;
+  }
+  .main__title {
+    font-size: 8rem;
+    padding-right: 2rem;
+    word-break: keep-all;
+    text-justify: distribute;
+  }
+  .main__btn {
+    height: auto;
+    align-self: start;
+    padding: 2rem 3rem;
+  }
+  .main__description {
+    font-size: 2rem;
+    padding-right: 2rem;
+  }
+}
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}/*# sourceMappingURL=main.css.map */
